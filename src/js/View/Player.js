@@ -4,7 +4,13 @@ import HitTest from "js/Util/HitTest";
 /**
  * 自機クラス
  */
+
 export default class Player extends UnitBase {
+
+    // upKey;
+    // let upKey = false;
+    
+
     constructor () {
         super ();
         this.x = 100;
@@ -13,31 +19,26 @@ export default class Player extends UnitBase {
         this.setWidth(40);
         this.setHeight(40);
 
-        let upKey = false;
-        let leftKey = false;
-        let downKey = false;
-        let rightKey = false;
-
         document.addEventListener('keydown', (event) => {
-
             //スクロールを無効化
             if(event.preventDefault){
                 event.preventDefault();
             }
+            
 
             let keyCode = event.keyCode;
             switch(keyCode){
                 case 38:
-                    upKey = true;
+                    Player.upKey = true;
                     break;
                 case 37:
-                    leftKey = true;
+                    Player.leftKey = true;
                     break;
                 case 40:
-                    downKey = true;
+                    Player.downKey = true;
                     break;
                 case 39:
-                    rightKey = true;
+                    Player.rightKey = true;
                     break;
             }
             
@@ -48,41 +49,22 @@ export default class Player extends UnitBase {
 
             switch(keyCode){
                 case 38:
-                    upKey = false;
+                    Player.upKey = false;
                     break;
                 case 37:
-                    leftKey = false;
+                    Player.leftKey = false;
                     break;
                 case 40:
-                    downKey = false;
+                    Player.downKey = false;
                     break;
                 case 39:
-                    rightKey = false;
+                    Player.rightKey = false;
                     break;
-                    
             }
         });
 
-        if(upKey){
-            this.y-=10;
-        }else if(leftKey){
-            this.x-=10;
-        }else if(downKey){
-            this.y+=10;
-        }else if(rightKey){
-            this.x+=10;
-        }
-
-        
-
-        
-
-        
     }
 
-        
-
-    
     
     /**
      * EnterFrame.jsの中で
@@ -90,7 +72,21 @@ export default class Player extends UnitBase {
      */
     update () {
         // 矢印キー　←↑→↓で動くようにしてください。googleで「js keycode」など検索してみて下さい。
+        if(Player.upKey){
+            this.y-=10;
+        }
         
+        if(Player.leftKey){
+            this.x-=10;
+        }
+        
+        if(Player.downKey){
+            this.y+=10;
+        }
+        
+        if(Player.rightKey){
+            this.x+=10;
+        }
 
         // スペースキーを押すとBulletが発射されるようにして下さい。
         // Enemyクラスを参考にしてください。
