@@ -12,14 +12,7 @@ export default class Player extends UnitBase {
         this.setHP(100);
         this.setWidth(40);
         this.setHeight(40);
-    }
-    
-    /**
-     * EnterFrame.jsの中で
-     * requestAnimationFrameから自動的にcallされ続けます。
-     */
-    update () {
-        // 矢印キー　←↑→↓で動くようにしてください。googleで「js keycode」など検索してみて下さい。
+
         document.addEventListener('keydown', (event) => {
 
             //スクロールを無効化
@@ -28,26 +21,37 @@ export default class Player extends UnitBase {
             }
 
             let keyCode = event.keyCode;
-            console.log(keyCode);
+            
             switch(keyCode){
                 //上
                 case 38:
-                    this.y--;
+                    this.y-=10;
                     break;
                 //左
                 case 37:
-                    this.x--;
+                    this.x-=10;
                     break;
                 //右
                 case 39:
-                    this.x++;
+                    this.x+=10;
                     break;
                 //下
                 case 40:
-                    this.y++;
+                    this.y+=10;
                     break;
             }
+            
         })
+
+    }
+    
+    /**
+     * EnterFrame.jsの中で
+     * requestAnimationFrameから自動的にcallされ続けます。
+     */
+    update () {
+        // 矢印キー　←↑→↓で動くようにしてください。googleで「js keycode」など検索してみて下さい。
+        
 
         // スペースキーを押すとBulletが発射されるようにして下さい。
         // Enemyクラスを参考にしてください。
