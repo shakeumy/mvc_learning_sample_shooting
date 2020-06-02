@@ -7,9 +7,6 @@ import HitTest from "js/Util/HitTest";
 
 export default class Player extends UnitBase {
 
-    // upKey;
-    // let upKey = false;
-    
 
     constructor () {
         super ();
@@ -19,26 +16,31 @@ export default class Player extends UnitBase {
         this.setWidth(40);
         this.setHeight(40);
 
+        //矢印キーが押されているか判断するフラグ
+        this.isUpKey = false;
+        this.isDownKey = false;
+        this.isLeftKey = false;
+        this.isRightKey = false;
+
         document.addEventListener('keydown', (event) => {
             //スクロールを無効化
             if(event.preventDefault){
                 event.preventDefault();
             }
-            
 
             let keyCode = event.keyCode;
             switch(keyCode){
                 case 38:
-                    Player.upKey = true;
+                    this.isUpKey = true;
                     break;
                 case 37:
-                    Player.leftKey = true;
+                    this.isLeftKey = true;
                     break;
                 case 40:
-                    Player.downKey = true;
+                    this.isDownKey = true;
                     break;
                 case 39:
-                    Player.rightKey = true;
+                    this.isRightKey = true;
                     break;
             }
             
@@ -49,16 +51,16 @@ export default class Player extends UnitBase {
 
             switch(keyCode){
                 case 38:
-                    Player.upKey = false;
+                    this.isUpKey = false;
                     break;
                 case 37:
-                    Player.leftKey = false;
+                    this.isLeftKey = false;
                     break;
                 case 40:
-                    Player.downKey = false;
+                    this.isDownKey = false;
                     break;
                 case 39:
-                    Player.rightKey = false;
+                    this.isRightKey = false;
                     break;
             }
         });
@@ -72,19 +74,19 @@ export default class Player extends UnitBase {
      */
     update () {
         // 矢印キー　←↑→↓で動くようにしてください。googleで「js keycode」など検索してみて下さい。
-        if(Player.upKey){
+        if(this.isUpKey){
             this.y-=10;
         }
         
-        if(Player.leftKey){
+        if(this.isLeftKey){
             this.x-=10;
         }
         
-        if(Player.downKey){
+        if(this.isDownKey){
             this.y+=10;
         }
         
-        if(Player.rightKey){
+        if(this.isRightKey){
             this.x+=10;
         }
 
