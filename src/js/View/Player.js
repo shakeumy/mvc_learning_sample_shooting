@@ -4,7 +4,10 @@ import HitTest from "js/Util/HitTest";
 /**
  * 自機クラス
  */
+
 export default class Player extends UnitBase {
+
+
     constructor () {
         super ();
         this.x = 100;
@@ -12,7 +15,58 @@ export default class Player extends UnitBase {
         this.setHP(100);
         this.setWidth(40);
         this.setHeight(40);
+
+        //矢印キーが押されているか判断するフラグ
+        this.isUpKey = false;
+        this.isDownKey = false;
+        this.isLeftKey = false;
+        this.isRightKey = false;
+
+        document.addEventListener('keydown', (event) => {
+            //スクロールを無効化
+            if(event.preventDefault){
+                event.preventDefault();
+            }
+
+            let keyCode = event.keyCode;
+            switch(keyCode){
+                case 38:
+                    this.isUpKey = true;
+                    break;
+                case 37:
+                    this.isLeftKey = true;
+                    break;
+                case 40:
+                    this.isDownKey = true;
+                    break;
+                case 39:
+                    this.isRightKey = true;
+                    break;
+            }
+            
+        });
+
+        document.addEventListener('keyup', (event) => {
+            let keyCode = event.keyCode;
+
+            switch(keyCode){
+                case 38:
+                    this.isUpKey = false;
+                    break;
+                case 37:
+                    this.isLeftKey = false;
+                    break;
+                case 40:
+                    this.isDownKey = false;
+                    break;
+                case 39:
+                    this.isRightKey = false;
+                    break;
+            }
+        });
+
     }
+
     
     /**
      * EnterFrame.jsの中で
@@ -20,6 +74,21 @@ export default class Player extends UnitBase {
      */
     update () {
         // 矢印キー　←↑→↓で動くようにしてください。googleで「js keycode」など検索してみて下さい。
+        if(this.isUpKey){
+            this.y-=10;
+        }
+        
+        if(this.isLeftKey){
+            this.x-=10;
+        }
+        
+        if(this.isDownKey){
+            this.y+=10;
+        }
+        
+        if(this.isRightKey){
+            this.x+=10;
+        }
 
         // スペースキーを押すとBulletが発射されるようにして下さい。
         // Enemyクラスを参考にしてください。
