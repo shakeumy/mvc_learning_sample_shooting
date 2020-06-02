@@ -13,6 +13,11 @@ export default class Player extends UnitBase {
         this.setWidth(40);
         this.setHeight(40);
 
+        let upKey = false;
+        let leftKey = false;
+        let downKey = false;
+        let rightKey = false;
+
         document.addEventListener('keydown', (event) => {
 
             //スクロールを無効化
@@ -21,29 +26,63 @@ export default class Player extends UnitBase {
             }
 
             let keyCode = event.keyCode;
-            
             switch(keyCode){
-                //上
                 case 38:
-                    this.y-=10;
+                    upKey = true;
                     break;
-                //左
                 case 37:
-                    this.x-=10;
+                    leftKey = true;
                     break;
-                //右
-                case 39:
-                    this.x+=10;
-                    break;
-                //下
                 case 40:
-                    this.y+=10;
+                    downKey = true;
+                    break;
+                case 39:
+                    rightKey = true;
                     break;
             }
             
-        })
+        });
 
+        document.addEventListener('keyup', (event) => {
+            let keyCode = event.keyCode;
+
+            switch(keyCode){
+                case 38:
+                    upKey = false;
+                    break;
+                case 37:
+                    leftKey = false;
+                    break;
+                case 40:
+                    downKey = false;
+                    break;
+                case 39:
+                    rightKey = false;
+                    break;
+                    
+            }
+        });
+
+        if(upKey){
+            this.y-=10;
+        }else if(leftKey){
+            this.x-=10;
+        }else if(downKey){
+            this.y+=10;
+        }else if(rightKey){
+            this.x+=10;
+        }
+
+        
+
+        
+
+        
     }
+
+        
+
+    
     
     /**
      * EnterFrame.jsの中で
