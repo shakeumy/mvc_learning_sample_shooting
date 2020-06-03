@@ -102,8 +102,8 @@ export default class Player extends UnitBase {
         // Enemyクラスを参考にしてください。
         
         if(this.isSpaceKey){
-            
-            const bullet = new Bullet (this.x + 20, this.y + 0 );
+            this.isSpaceKey = false;
+            const bullet = new Bullet (this.x + 40, this.y );
             bullet.setSpeed(4);
         }
 
