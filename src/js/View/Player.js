@@ -97,10 +97,12 @@ export default class Player extends UnitBase {
         const bullet = HitTest.getHitObjectByClassName(this, "Bullet");
         if(bullet) {
             // ダメージを与えて下さい。↓コメントアウトを外していただくですがw
-            // this.setDamage (bullet.damage);
+            this.setDamage (bullet.damage);
             // ↑さて、setDamageはどこで定義されているでしょうか？
-
             // HPが0になったら死亡状態にし、MainManageに通知して下さい。
+            if(this.HP <= 0){
+                console.log('gameover');
+            } 
             // そして、MainManager側に、その通知を受け取れるようにして下さい。
             // console.log (this.HP);
         }
