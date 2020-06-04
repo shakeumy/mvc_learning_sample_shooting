@@ -1,4 +1,5 @@
 import UnitBase from "js/View/UnitBase";
+import Bullet from "./Bullet";
 import HitTest from "js/Util/HitTest";
 
 /**
@@ -6,7 +7,6 @@ import HitTest from "js/Util/HitTest";
  */
 
 export default class Player extends UnitBase {
-
 
     constructor () {
         super ();
@@ -21,6 +21,7 @@ export default class Player extends UnitBase {
         this.isDownKey = false;
         this.isLeftKey = false;
         this.isRightKey = false;
+        this.isSpaceKey = false;
 
         document.addEventListener('keydown', (event) => {
             //スクロールを無効化
@@ -42,6 +43,9 @@ export default class Player extends UnitBase {
                 case 39:
                     this.isRightKey = true;
                     break;
+                case 32:
+                    this.isSpaceKey = true;
+                    break;
             }
             
         });
@@ -62,6 +66,10 @@ export default class Player extends UnitBase {
                 case 39:
                     this.isRightKey = false;
                     break;
+                case 32:
+                    this.isSpaceKey = false;
+                    break;
+                    
             }
         });
 
@@ -92,6 +100,12 @@ export default class Player extends UnitBase {
 
         // スペースキーを押すとBulletが発射されるようにして下さい。
         // Enemyクラスを参考にしてください。
+        
+        if(this.isSpaceKey){
+            this.isSpaceKey = false;
+            const bullet = new Bullet (this.x + 40, this.y );
+            bullet.setSpeed(4);
+        }
 
         // 敵の弾に当たったらダメージを受けるようにして下さい。
         const bullet = HitTest.getHitObjectByClassName(this, "Bullet");
