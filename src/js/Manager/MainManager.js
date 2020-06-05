@@ -17,6 +17,12 @@ export default class MainManager {
         //するようにしてください。
         this.player = new Player ();
 
+        this.player.addEventListener('gameover', function(){
+            //gameoverの通知をもらう
+            alert('gameover')
+            //UIに表示
+        }, false);
+
         //敵のマネージャークラスです
         //EnemyManagerクラスにて課題を確認し、色々な敵を作ったり、
         //制御してください。
