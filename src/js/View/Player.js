@@ -102,7 +102,15 @@ export default class Player extends UnitBase {
             // HPが0になったら死亡状態にし、MainManageに通知して下さい。
             if(this.HP <= 0){
                 console.log('gameover');
-            } 
+                
+                document.addEventListener('gameover', function(){
+                    alert('gameover')
+                }, false);
+
+                let death = new Event('gameover');
+
+                document.dispatchEvent(death);
+            }
             // そして、MainManager側に、その通知を受け取れるようにして下さい。
             // console.log (this.HP);
         }
