@@ -28,4 +28,9 @@ export default class UI extends CommonBase {
         context.fillStyle = "rgb(255, 169, 0)";
         context.fillText("SCORE : " + this.score, 10, 10);
     }
+
+    drawGameOver () {
+        context.fillStyle = "rgb(255, 169, 0)";
+        context.fillText("GAME OVER", 100, 10);
+    }
 }

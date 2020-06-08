@@ -16,11 +16,13 @@ export default class MainManager {
         //Playerクラスにて課題を確認し、動くようにしたり、弾をとばせたり
         //するようにしてください。
         this.player = new Player ();
+        this.ui = new UI();
 
         this.player.addEventListener('gameover', function(){
             //gameoverの通知をもらう
-            alert('gameover')
+            console.log('gameover');
             //UIに表示
+            this.ui.drawGameOver();
         }, false);
 
         //敵のマネージャークラスです
